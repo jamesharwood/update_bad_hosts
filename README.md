@@ -7,6 +7,7 @@ systemd, bash, md5sum, awk, sed, sort<BR>
 <B>INSTALL</B><BR>
 Download update_bad_hosts folder to /etc<BR>
 chmod +x /etc/update_bad_hosts/*.sh<BR>
+chown -R root:root /etc/update_bad_hosts
 systemctl enable /etc/update_bad_hosts/update_bad_hosts.service<BR>
 systemctl start update_bad_hosts.service<BR>
 <BR>
