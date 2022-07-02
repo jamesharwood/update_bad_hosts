@@ -3,7 +3,7 @@
 TMP_PATH="/tmp"
 NAME=$(basename "$0")
 
-# give a long wait until system until first run after boot
+# give a 5 minute wait until first run after boot
 sleep 300
 
 while [ 5 -gt 4 ]; do
