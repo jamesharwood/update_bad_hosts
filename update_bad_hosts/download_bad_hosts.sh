@@ -64,7 +64,7 @@ if [ $dl_ok -gt 0 ]; then
   rm "$TMP_PATH/download_bad_hosts.out"
  fi
  awk -F ' ' '{if($1=="0.0.0.0" || $1=="::"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp2" > "$TMP_PATH/download_bad_hosts.tmp3"
- # print out remove lines to log
+ # print out removed lines to log
  awk -F ' ' '{if($1!="0.0.0.0" && $1!="::"){printf "%-30s  %s %s\n", "[download_bad_hosts.sh]", $1 , $2}}' "$TMP_PATH/download_bad_hosts.tmp2"
  # remove entries where localhost address in hostname field (ie malformed lines)
  awk -F ' ' '{if($2!="0.0.0.0" && $2!="::"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp3" > "$TMP_PATH/download_bad_hosts.out"
