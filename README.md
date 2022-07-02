@@ -10,6 +10,7 @@ chmod +x /etc/update_bad_hosts/*.sh<BR>
 chown -R root:root /etc/update_bad_hosts<BR>
 systemctl enable /etc/update_bad_hosts/update_bad_hosts.service<BR>
 systemctl start update_bad_hosts.service<BR>
+ Wait 5 minutes before first entries appear in log file.
 <BR>
 <B>CONFIGURATION</B><BR>
 Log is at /var/log/update_bad_hosts.log<BR>
