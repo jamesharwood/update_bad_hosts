@@ -14,7 +14,7 @@ if [ -e "$TMP_PATH/download_bad_hosts.out" ]; then
 
  # see if current list of bad hosts is different from new lift of bad hosts, only update /etc/hosts if new list if different
  go=0
- if [ -e /etc/custom_scripts/current ]; then
+ if [ -e /etc/update_bad_hosts/current ]; then
   printf "%-30s %s\n" "[$NAME]" "wget successful. Comparing downloaded list to local version."
   md5A=$(md5sum --tag /etc/update_bad_hosts/current | cut -d = -f 2 | tr -d " ")
   md5B=$(md5sum --tag "$TMP_PATH/download_bad_hosts.out" | cut -d = -f 2 | tr -d " ")
@@ -22,6 +22,7 @@ if [ -e "$TMP_PATH/download_bad_hosts.out" ]; then
    go=1
   fi
  else
+  printf "%-30s %s\n" "[$NAME]" "wget successful."
   go=1
  fi
 
