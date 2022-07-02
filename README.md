@@ -18,7 +18,7 @@ Log is at /var/log/update_bad_hosts.log<BR>
 To add/remove blocklist sources edit /etc/update_bad_hosts/list-blocklists.txt<BR>
 <BR>
 <B>OVERVIEW</B><BR>
-Service performs daily download of multiple host blocklists, aggregates them, ensures no funny business in the lists (Makes sure all entries point to 0.0.0.0), removes duplicates and updates /etc/hosts<BR>
+Service performs daily download of multiple advertising/tracker/analytics blocklists, aggregates them, ensures no funny business in the lists (Makes sure all entries point to 0.0.0.0), removes duplicates and updates /etc/hosts<BR>
 <BR>
 Download list in this git contains the following which seem to be updated regularly:<BR>
 https://hosts.anudeep.me/mirror/adservers.txt<BR>
