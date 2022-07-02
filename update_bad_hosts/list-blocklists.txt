@@ -1,0 +1,8 @@
+https://hosts.anudeep.me/mirror/adservers.txt
+https://hosts.anudeep.me/mirror/CoinMiner.txt
+https://github.com/notracking/hosts-blocklists/raw/master/hostnames.txt
+https://www.netguard.me/hosts
+https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts;showintro=0
+https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/trackers.hosts?inline=false
+https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/malware.hosts?inline=false
+

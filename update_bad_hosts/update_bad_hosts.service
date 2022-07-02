@@ -1,0 +1,16 @@
+[Unit]
+Description=Updates /etc/hosts bad host (trackers, adverts, analytics) blocklist
+ConditionPathExists=/etc/update_bad_hosts/run.sh
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=sh -c "/etc/update_bad_hosts/run.sh >> /var/log/update_bad_hosts.log"
+TimeoutSec=0
+StandardOutput=null
+StandardError=null
+RemainAfterExit=no
+SysVStartPriority=99
+
+[Install]
+WantedBy=multi-user.target
