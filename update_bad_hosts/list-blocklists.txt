@@ -5,4 +5,3 @@ https://www.netguard.me/hosts
 https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts;showintro=0
 https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/trackers.hosts?inline=false
 https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/malware.hosts?inline=false
-file:///etc/update_bad_hosts/google_android_blocklist.txt
