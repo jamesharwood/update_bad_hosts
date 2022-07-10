@@ -21,7 +21,16 @@ while read -r line; do
   if [ -e "$TMP_PATH/download_bad_hosts.tmp0" ]; then
    rm "$TMP_PATH/download_bad_hosts.tmp0"
   fi
-  wget -q "$line" -O "$TMP_PATH/download_bad_hosts.tmp0"
+  # either wget for http address or cat for local file
+  isFile=$(echo "$line" | awk '{print substr($0,0,7)}' | grep -c "file://")
+  if [ $isFile -lt 1 ]; then
+   wget -q "$line" -O "$TMP_PATH/download_bad_hosts.tmp0"
+  else
+   inFilename=$(echo "$line" | cut -c8-)
+   if [ -e "$inFilename" ]; then
+    cat "$inFilename" > "$TMP_PATH/download_bad_hosts.tmp0"
+   fi
+  fi
   # check if download worked
   if [ $? -eq 0 ]; then
    if [ -e "$TMP_PATH/download_bad_hosts.tmp0" ]; then
