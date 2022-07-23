@@ -1,24 +1,23 @@
+## on mediatek cpu phones
 0.0.0.0 qepodownload.mediatek.com
 0.0.0.0 ul.elephanttek.com
-0.0.0.0 firebaseremoteconfig.googleapis.com
-0.0.0.0 google-analytics.com
-0.0.0.0 gcm-http.googleapis.com
-0.0.0.0 gcm-xmpp.googleapis.com
-0.0.0.0 fcm.googleapis.com
-0.0.0.0 fcm-xmpp.googleapis.com
-0.0.0.0 device-provisioning.googleapis.com
-0.0.0.0 firebaseinstallations.googleapis.com
-0.0.0.0 fcm-xmpp.googleapis.com
-0.0.0.0 gcm-xmpp.googleapis.com
-0.0.0.0 clients2.google.com
-0.0.0.0 clients3.google.com
-0.0.0.0 clients4.google.com
-0.0.0.0 clients5.google.com
-0.0.0.0 clients6.google.com
-0.0.0.0 omahaproxy.appspot.com
+## Used by Pixel devices for OTA updates
 0.0.0.0 ota.googlezip.net
 0.0.0.0 ota-cache1.googlezip.net
 0.0.0.0 ota-cache2.googlezip.net
+## needed for chrome updates
+#0.0.0.0 omahaproxy.appspot.com
+## Google Cloud Messaging (e.g. EMM Console <-> DPC communication, like pushing configs)
+0.0.0.0 gcm-http.googleapis.com
+0.0.0.0 gcm-xmpp.googleapis.com
+## Firebase Cloud Messaging (for example, . Find My Device, EMM Console <-> DPC communication, like pushing configs)
+0.0.0.0 fcm.googleapis.com
+0.0.0.0 fcm-xmpp.googleapis.com
+0.0.0.0 firebaseinstallations.googleapis.com
+## When using persistent bidirectional XMPP connection to FCM and GCM servers
+0.0.0.0 fcm-xmpp.googleapis.com
+0.0.0.0 gcm-xmpp.googleapis.com
+## These allow mobile devices to connect to FCM when an organization firewall is present on the network
 0.0.0.0 mtalk.google.com
 0.0.0.0 mtalk4.google.com
 0.0.0.0 mtalk-staging.google.com
@@ -32,8 +31,18 @@
 0.0.0.0 alt7-mtalk.google.com
 0.0.0.0 alt8-mtalk.google.com
 0.0.0.0 device-provisioning.googleapis.com
-# needed for google maps and play store
+0.0.0.0 firebaseremoteconfig.googleapis.com
+## Domains shared by various Google backend services such as crash reporting, Chrome Bookmark Sync, time sync (tlsdate), and many others
+0.0.0.0 clients2.google.com
+0.0.0.0 clients3.google.com
+0.0.0.0 clients4.google.com
+0.0.0.0 clients5.google.com
+0.0.0.0 clients6.google.com
+## needed for google maps, play store
 #0.0.0.0 android.apis.google.com
 #0.0.0.0 android.googleapis.com
 #0.0.0.0 connectivitycheck.android.com
 #0.0.0.0 connectivitycheck.gstatic.com
+
+## needed for a lot of google search results to work
+#0.0.0.0 google-analytics.com
