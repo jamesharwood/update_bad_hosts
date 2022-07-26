@@ -45,4 +45,5 @@
 #0.0.0.0 connectivitycheck.gstatic.com
 
 ## needed for a lot of google search results to work
-#0.0.0.0 google-analytics.com
+0.0.0.0 google-analytics.com
+#0.0.0.0 googleadservices.com
