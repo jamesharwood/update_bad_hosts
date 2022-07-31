@@ -2,9 +2,13 @@
 Performs daily update of blocked advertising/tracker hosts in /etc/hosts from multiple sources
 
 <B>REQUIRED PACKAGES</B> (Tested on Debian Bullseye)<BR>
-systemd, bash, md5sum, awk, sed, sort<BR>
+systemd, bash, md5sum, awk, sed, sort, cut, wget<BR>
 <BR>
-<B>INSTALL</B><BR>
+<B>INSTALL USING DPKG (DEBAIN, UBUNTU)</B><BR>
+Download update-bad-hosts_X.X_all.deb file<BR>
+sudo dpkg --install update-bad-hosts_X.X_all.deb<BR>
+<BR>
+<B>INSTALL MANUALLY</B><BR>
 Download update_bad_hosts folder to /etc<BR>
 chmod +x /etc/update_bad_hosts/*.sh<BR>
 chown -R root:root /etc/update_bad_hosts<BR>
