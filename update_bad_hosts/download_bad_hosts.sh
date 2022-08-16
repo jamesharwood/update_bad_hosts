@@ -76,14 +76,18 @@ if [ $dl_ok -gt 0 ]; then
  # print out removed lines to log
  awk -F ' ' '{if($1!="0.0.0.0" && $1!="::"){printf "%-30s  %s %s\n", "[download_bad_hosts.sh]", $1 , $2}}' "$TMP_PATH/download_bad_hosts.tmp2"
  # remove entries where localhost address in hostname field (ie malformed lines)
- awk -F ' ' '{if($2!="0.0.0.0" && $2!="::"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp3" > "$TMP_PATH/download_bad_hosts.out"
+ awk -F ' ' '{if($2!="0.0.0.0" && $2!="::"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp3" > "$TMP_PATH/download_bad_hosts.tmp4"
  # remove whitelisted hosts from block list
  printf "%-30s %s\n" "[$NAME]" "Removing any whitelisted entries ..."
  cat whitelist.txt | while read line || [[ -n $line ]]; do
-  printf "%-30s %s\n" "[$NAME]" " $line"
-  awk "!/$line/" "$TMP_PATH/download_bad_hosts.tmp4" > "$TMP_PATH/download_bad_hosts.out"
-  cp "$TMP_PATH/download_bad_hosts.out" "$TMP_PATH/download_bad_hosts.tmp4"
-  rm "$TMP_PATH/download_bad_hosts.out"
+  if [ -z "$line" ]; then
+   echo -n ""
+  else
+   printf "%-30s %s\n" "[$NAME]" " $line"
+   awk "!/$line/" "$TMP_PATH/download_bad_hosts.tmp4" > "$TMP_PATH/download_bad_hosts.out"
+   cp "$TMP_PATH/download_bad_hosts.out" "$TMP_PATH/download_bad_hosts.tmp4"
+   rm "$TMP_PATH/download_bad_hosts.out"
+  fi
  done
  cp "$TMP_PATH/download_bad_hosts.tmp4" "$TMP_PATH/download_bad_hosts.out"
  rm "$TMP_PATH/download_bad_hosts.tmp2"
@@ -102,4 +106,3 @@ else
  exit 1
 
 fi
-
