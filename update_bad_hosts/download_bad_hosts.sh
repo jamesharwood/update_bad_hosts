@@ -48,7 +48,7 @@ while read -r line; do
    printf "%-30s %s\n" "[$NAME]" "  FAILED"
   fi
  fi
-done < list-blocklists.txt
+done < blocklist_urls.txt
 if [ $dl_ok -ne $dl_lines ]; then
  dl_ok=0
 fi
@@ -79,10 +79,13 @@ if [ $dl_ok -gt 0 ]; then
  printf "%-30s %s\n" "[$NAME]" "Removing any whitelisted entries ..."
  cat whitelist.txt | while read line || [[ -n $line ]]; do
   if [ -n "$line" ]; then
-   printf "%-30s %s\n" "[$NAME]" " $line"
-   awk "!/$line/" "$TMP_PATH/download_bad_hosts.tmp4" > "$TMP_PATH/download_bad_hosts.out"
-   cp "$TMP_PATH/download_bad_hosts.out" "$TMP_PATH/download_bad_hosts.tmp4"
-   rm "$TMP_PATH/download_bad_hosts.out"
+   hasHash=$(echo "$line" | grep -c "#")
+   if [ $hasHash -eq 0 ]; then
+    printf "%-30s %s\n" "[$NAME]" " $line"
+    awk "!/$line/" "$TMP_PATH/download_bad_hosts.tmp4" > "$TMP_PATH/download_bad_hosts.out"
+    cp "$TMP_PATH/download_bad_hosts.out" "$TMP_PATH/download_bad_hosts.tmp4"
+    rm "$TMP_PATH/download_bad_hosts.out"
+   fi
   fi
  done
  cp "$TMP_PATH/download_bad_hosts.tmp4" "$TMP_PATH/download_bad_hosts.out"
