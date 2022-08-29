@@ -13,9 +13,7 @@ printf "%-30s %s\n" "[$NAME]" "Downloading blocklists ..."
 dl_ok=0
 dl_lines=0
 while read -r line; do
- if [ -z "$line" ]; then
-  echo -n ""
- else
+ if [ -n "$line" ]; then
   let "dl_lines=dl_lines+1"
   printf "%-30s %s\n" "[$NAME]" " $line ..."
   if [ -e "$TMP_PATH/download_bad_hosts.tmp0" ]; then
@@ -80,9 +78,7 @@ if [ $dl_ok -gt 0 ]; then
  # remove whitelisted hosts from block list
  printf "%-30s %s\n" "[$NAME]" "Removing any whitelisted entries ..."
  cat whitelist.txt | while read line || [[ -n $line ]]; do
-  if [ -z "$line" ]; then
-   echo -n ""
-  else
+  if [ -n "$line" ]; then
    printf "%-30s %s\n" "[$NAME]" " $line"
    awk "!/$line/" "$TMP_PATH/download_bad_hosts.tmp4" > "$TMP_PATH/download_bad_hosts.out"
    cp "$TMP_PATH/download_bad_hosts.out" "$TMP_PATH/download_bad_hosts.tmp4"
@@ -97,6 +93,11 @@ if [ $dl_ok -gt 0 ]; then
  exit 0
 
 else
+
+ # clean up from last run
+ if [ -e "$TMP_PATH/download_bad_hosts.tmp1" ]; then
+  rm "$TMP_PATH/download_bad_hosts.tmp1"
+ fi
 
  # make sure output file doesnt exist
  if [ -e "$TMP_PATH/download_bad_hosts.out" ]; then
