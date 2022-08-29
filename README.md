@@ -19,7 +19,7 @@ Wait 5 minutes before first entries appear in log file.<BR>
 <B>CONFIGURATION</B><BR>
 Log is at /var/log/update_bad_hosts.log<BR>
 <BR>
-To add/remove blocklist sources edit /etc/update_bad_hosts/list-blocklists.txt<BR>
+To add/remove blocklist sources edit /etc/update_bad_hosts/blocklist_urls.txt<BR>
 <BR>
 <B>OVERVIEW</B><BR>
 Service performs daily download of multiple advertising/tracker/analytics blocklists, aggregates them, ensures no funny business in the lists (Makes sure all entries point to 0.0.0.0), removes duplicates and updates /etc/hosts<BR>
@@ -33,4 +33,4 @@ https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts;showintro=0<BR>
 https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/trackers.hosts?inline=false<BR>
 https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/malware.hosts?inline=false<BR>
 <BR>
-To block most Google Android services (with the exception of Play Store and Maps) add the line 'file:///etc/update_bad_hosts/google_android_blocklist.txt' to /etc/update_bad_hosts/list-blocklists.txt<br>
+To block most Google Android services (with the exception of Play Store and Maps) add the line 'file:///etc/update_bad_hosts/google_android_blocklist.txt' to /etc/update_bad_hosts/blocklist_urls.txt<br>
