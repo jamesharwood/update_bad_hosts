@@ -39,6 +39,8 @@ if [ -e "$TMP_PATH/download_bad_hosts.out" ]; then
   cat "$TMP_PATH/update_bad_hosts.out" > /etc/hosts
   # save a copy of bad hosts list for next run to compare to
   cp "$TMP_PATH/download_bad_hosts.out" /etc/update_bad_hosts/current
+  # clean up
+  rm "$TMP_PATH/update_bad_hosts.out"
  else
   printf "%-30s %s\n" "[$NAME]" " No update to current blocklist needed."
  fi
