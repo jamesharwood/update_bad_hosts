@@ -1,0 +1,20 @@
+## on mediatek cpu phones
+0.0.0.0 qepodownload.mediatek.com
+0.0.0.0 ul.elephanttek.com
+
+# manually added bad hosts
+0.0.0.0 gavbje.untilbardie.buzz
+0.0.0.0 tabloidquantitycosts.com
+0.0.0.0 www.couponweeklyrewardluckyday.rest
+0.0.0.0 zeyappland.com
+0.0.0.0 www.luckyextraluckydayweekly.rest
+0.0.0.0 bebeds.exyuteam.com
+0.0.0.0 us.clean-1-clean.club
+0.0.0.0 www.luckydayprizerewardlucky.rest
+
+# tracking and analytics in apps
+0.0.0.0 app-measurement.com
+0.0.0.0 googleads.g.doubleclick.net
+0.0.0.0 ping.chartbeat.net
+0.0.0.0 static.doubleclick.net
+0.0.0.0 uk-script.dotmetrics.net
