@@ -56,25 +56,16 @@ fi
 # only produce output file if all lines downloaded ok
 if [ $dl_ok -gt 0 ]; then
 
- # remove duplicates
- printf "%-30s %s\n" "[$NAME]" "Removing duplicate entries ..."
- sort -u "$TMP_PATH/download_bad_hosts.tmp1" > "$TMP_PATH/download_bad_hosts.tmp2"
- numLinesOri=$(wc -l "$TMP_PATH/download_bad_hosts.tmp1" | cut -d " " -f 1)
- rm "$TMP_PATH/download_bad_hosts.tmp1"
- numLinesAfterDup=$(wc -l "$TMP_PATH/download_bad_hosts.tmp2" | cut -d " " -f 1)
- let "linesRemoved=numLinesOri-numLinesAfterDup"
- printf "%-30s %s\n" "[$NAME]" " $linesRemoved duplicates removed."
-
  # check for non empty ip adresses in hosts (ie. suspicious)
  printf "%-30s %s\n" "[$NAME]" "Removing any entries that do not point to localhost ..."
  if [ -e "$TMP_PATH/download_bad_hosts.out" ]; then
   rm "$TMP_PATH/download_bad_hosts.out"
  fi
- awk -F ' ' '{if($1=="0.0.0.0" || $1=="::"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp2" > "$TMP_PATH/download_bad_hosts.tmp3"
+ awk -F ' ' '{if($1=="0.0.0.0" || $1=="::" || $1=="::1"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp1" > "$TMP_PATH/download_bad_hosts.tmp3"
  # print out removed lines to log
- awk -F ' ' '{if($1!="0.0.0.0" && $1!="::"){printf "%-30s  %s %s\n", "[download_bad_hosts.sh]", $1 , $2}}' "$TMP_PATH/download_bad_hosts.tmp2"
+ awk -F ' ' '{if($1!="0.0.0.0" && $1!="::" || $1=="::1"){printf "%-30s  %s %s\n", "[download_bad_hosts.sh]", $1 , $2}}' "$TMP_PATH/download_bad_hosts.tmp1"
  # remove entries where localhost address in hostname field (ie malformed lines)
- awk -F ' ' '{if($2!="0.0.0.0" && $2!="::"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp3" > "$TMP_PATH/download_bad_hosts.tmp4"
+ awk -F ' ' '{if($2!="0.0.0.0" && $2!="::" && $2!="::1"){print $1" "$2}}' "$TMP_PATH/download_bad_hosts.tmp3" > "$TMP_PATH/download_bad_hosts.tmp4"
  # remove whitelisted hosts from block list
  printf "%-30s %s\n" "[$NAME]" "Removing any whitelisted entries ..."
  cat whitelist.txt | while read line || [[ -n $line ]]; do
@@ -88,10 +79,26 @@ if [ $dl_ok -gt 0 ]; then
    fi
   fi
  done
- cp "$TMP_PATH/download_bad_hosts.tmp4" "$TMP_PATH/download_bad_hosts.out"
- rm "$TMP_PATH/download_bad_hosts.tmp2"
+ # add ip6 entries based on ip4 entries
+ printf "%-30s %s\n" "[$NAME]" "Generating IP6 entries based on ip4 entries ..."
+ cp "$TMP_PATH/download_bad_hosts.tmp4" "$TMP_PATH/download_bad_hosts.tmp5"
+ awk '{if($1=="0.0.0.0") {$1="::"} print $0}' "$TMP_PATH/download_bad_hosts.tmp5" > "$TMP_PATH/download_bad_hosts.tmp6"
+ cat "$TMP_PATH/download_bad_hosts.tmp6" >> "$TMP_PATH/download_bad_hosts.tmp4"
+ # remove duplicates
+ printf "%-30s %s\n" "[$NAME]" "Removing duplicate entries ..."
+ sort -u "$TMP_PATH/download_bad_hosts.tmp4" > "$TMP_PATH/download_bad_hosts.tmp7"
+ numLinesOri=$(wc -l "$TMP_PATH/download_bad_hosts.tmp4" | cut -d " " -f 1)
+ numLinesAfterDup=$(wc -l "$TMP_PATH/download_bad_hosts.tmp7" | cut -d " " -f 1)
+ let "linesRemoved=numLinesOri-numLinesAfterDup"
+ printf "%-30s %s\n" "[$NAME]" " $linesRemoved duplicates removed."
+
+ cp "$TMP_PATH/download_bad_hosts.tmp7" "$TMP_PATH/download_bad_hosts.out"
+ rm "$TMP_PATH/download_bad_hosts.tmp1"
  rm "$TMP_PATH/download_bad_hosts.tmp3"
  rm "$TMP_PATH/download_bad_hosts.tmp4"
+ rm "$TMP_PATH/download_bad_hosts.tmp5"
+ rm "$TMP_PATH/download_bad_hosts.tmp6"
+ rm "$TMP_PATH/download_bad_hosts.tmp7"
 
  exit 0
 
